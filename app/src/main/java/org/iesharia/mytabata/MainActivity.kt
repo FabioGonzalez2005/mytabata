@@ -20,6 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import org.iesharia.mytabata.ui.theme.MytabataTheme
 
+var counterState : Boolean = false
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,23 +42,27 @@ class MainActivity : ComponentActivity() {
 fun Counter(modifier: Modifier = Modifier) {
     var theCounter by remember { mutableStateOf("00") }
 
-    object : CountDownTimer(99000, 1000) {
-
-        override fun onTick(millisUntilFinished: Long) {
-            theCounter = (millisUntilFinished / 1000).toString()
-        }
-
-        override fun onFinish() {
-            theCounter = "99"
-        }
-    }.start()
-
     Column {
         Text(
             text = theCounter,
             modifier = modifier
         )
         Button(onClick = {}) {
+            if (!counterState) {
+
+                object : CountDownTimer(99000, 1000) {
+
+                    override fun onTick(millisUntilFinished: Long) {
+                        theCounter = (millisUntilFinished / 1000).toString()
+                    }
+
+                    override fun onFinish() {
+                        counterState = true
+                    }
+                }.start()
+                counterState = true
+            }
+
             Text(
                 text = "Pulsar"
             )
