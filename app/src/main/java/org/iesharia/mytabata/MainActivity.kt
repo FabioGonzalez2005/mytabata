@@ -47,21 +47,22 @@ fun Counter(modifier: Modifier = Modifier) {
             text = theCounter,
             modifier = modifier
         )
-        Button(onClick = {}) {
+        Button(onClick = {
             if (!counterState) {
 
-                object : CountDownTimer(99000, 1000) {
+            object : CountDownTimer(99000, 1000) {
 
-                    override fun onTick(millisUntilFinished: Long) {
-                        theCounter = (millisUntilFinished / 1000).toString()
-                    }
+                override fun onTick(millisUntilFinished: Long) {
+                    theCounter = (millisUntilFinished / 1000).toString()
+                }
 
-                    override fun onFinish() {
-                        counterState = true
-                    }
-                }.start()
-                counterState = true
-            }
+                override fun onFinish() {
+                    counterState = true
+                }
+            }.start()
+            counterState = true
+        }}) {
+
 
             Text(
                 text = "Pulsar"
