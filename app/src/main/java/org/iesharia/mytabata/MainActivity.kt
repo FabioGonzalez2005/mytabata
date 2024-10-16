@@ -20,8 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import org.iesharia.mytabata.ui.theme.MytabataTheme
 
-var counterState : Boolean = false
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,37 +38,32 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Counter(modifier: Modifier = Modifier) {
-    var theCounter by remember { mutableStateOf("00") }
+    var theCounter by remember { mutableStateOf(0L) }
+    val miConterDown = CounterDown(99, {newvalue -> theCounter = newvalue})
+
 
     Column {
         Text(
-            text = theCounter,
+            text = theCounter.toString(),
             modifier = modifier
         )
         Button(onClick = {
-            if (!counterState) {
-
-            object : CountDownTimer(99000, 1000) {
-
-                override fun onTick(millisUntilFinished: Long) {
-                    theCounter = (millisUntilFinished / 1000).toString()
-                }
-
-                override fun onFinish() {
-                    counterState = true
-                }
-            }.start()
-            counterState = true
-        }}) {
 
 
+            if (!miConterDown.counterState) {
+                miConterDown.myCounter.start()
+                miConterDown.counterState = true
+            } else {
+                miConterDown.myCounter.cancel()
+            }
+        }) {
             Text(
                 text = "Pulsar"
             )
-
         }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
