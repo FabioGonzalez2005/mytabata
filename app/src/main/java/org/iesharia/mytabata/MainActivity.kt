@@ -94,6 +94,13 @@ fun TimeSelector(
                     .size(50.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
             ) {
+                Text(
+                    text = "-",
+                    color = Color.White,
+                    fontSize = 24.sp,
+                    textAlign = TextAlign.Center
+                )
+            }
 
             }
         }
