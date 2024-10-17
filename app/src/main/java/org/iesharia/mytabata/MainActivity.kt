@@ -102,8 +102,9 @@ fun TimeSelector(
                 )
             }
 
-            Text(text = value.toString())
+            Spacer(modifier = Modifier.width(16.dp))
 
+            Text(text = value.toString())
             }
         }
     }
