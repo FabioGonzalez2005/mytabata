@@ -105,7 +105,20 @@ fun TimeSelector(
             Spacer(modifier = Modifier.width(16.dp))
 
             Text(text = value.toString())
+
+            Button(
+                onClick = onIncrease,
+                modifier = Modifier
+                    .size(50.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
+            ) {
+                Text(
+                    text = "+",
+                    color = Color.White,
+                    fontSize = 24.sp,
+                    textAlign = TextAlign.Center
+                )
             }
         }
     }
-
+}
