@@ -8,7 +8,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import org.iesharia.mytabata.ui.theme.MytabataTheme
 
 class MainActivity : ComponentActivity() {
@@ -79,4 +82,20 @@ fun TimeSelector(
     onIncrease: () -> Unit,
     onDecrease: () -> Unit
 ) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(text = label)
+        Row(
+            modifier = Modifier.padding(top = 8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Button(
+                onClick = onDecrease,
+                modifier = Modifier
+                    .size(50.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
+            ) {
+
+            }
+        }
+    }
 }
