@@ -112,7 +112,11 @@ fun TimeSelector(
 
             Spacer(modifier = Modifier.width(70.dp))
 
-            Text(text = value.toString())
+            Text(
+                text = value.toString(),
+                fontSize = 30.sp,
+                textAlign = TextAlign.Center
+            )
 
             Spacer(modifier = Modifier.width(70.dp))
 
