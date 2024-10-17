@@ -69,8 +69,16 @@ fun MainMenu(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        Button(onClick = { }) {
-            Text("Iniciar Tabata")
+        Button(
+            onClick = { },
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
+        ) {
+            Text(
+                text = "Iniciar tabata",
+                color = Color.White,
+                fontSize = 24.sp,
+                textAlign = TextAlign.Center
+            )
         }
     }
 }
@@ -80,7 +88,7 @@ fun TimeSelector(
     label: String,
     value: Int,
     onIncrease: () -> Unit,
-    onDecrease: () -> Unit
+    onDecrease: () -> Unit,
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(text = label)
