@@ -102,7 +102,9 @@ fun TimeSelector(
                 )
             }
 
+            Text(text = value.toString())
+
             }
         }
     }
-}
+
