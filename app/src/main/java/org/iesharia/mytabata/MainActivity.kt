@@ -51,6 +51,15 @@ fun MainMenu(modifier: Modifier = Modifier) {
         onDecrease = { if (exerciseTime > 5) exerciseTime -= 5 }
     )
 
+    Spacer(modifier = Modifier.height(16.dp))
+
+    TimeSelector(
+        label = "Tiempo de descanso (segundos)",
+        value = restTime,
+        onIncrease = { restTime += 5 },
+        onDecrease = { if (restTime > 5) restTime -= 5 }
+    )
+
     Spacer(modifier = Modifier.height(32.dp))
 
     Button(onClick = { }) {
