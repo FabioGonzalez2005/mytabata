@@ -37,30 +37,17 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Counter(modifier: Modifier = Modifier) {
-    var theCounter by remember { mutableStateOf(0L) }
-    var miConterDown by remember{ mutableStateOf(CounterDown(99, {newvalue -> theCounter = newvalue}))}
+fun MainMenu(modifier: Modifier = Modifier) {
+    var sets by remember { mutableStateOf(3) }
+    var exerciseTime by remember { mutableStateOf(30) }
+    var restTime by remember { mutableStateOf(15) }
 
-    Column {
-        Text(
-            text = theCounter.toString(),
-            modifier = modifier
-        )
-        Button(onClick = {
-            miConterDown.toggle()
-        }) {
-            Text(
-                text = "Pulsar"
-            )
-        }
-    }
-}
 
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     MytabataTheme {
-        Counter()
+        MainMenu()
     }
 }
