@@ -110,11 +110,11 @@ fun TimeSelector(
                 )
             }
 
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.width(70.dp))
 
             Text(text = value.toString())
 
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.width(70.dp))
 
             Button(
                 onClick = onIncrease,
