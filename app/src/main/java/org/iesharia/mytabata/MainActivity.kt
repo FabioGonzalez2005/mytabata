@@ -64,7 +64,7 @@ fun MainMenu(modifier: Modifier = Modifier) {
             label = "Tiempo de descanso (segundos)",
             value = restTime,
             onIncrease = { restTime += 5 },
-            onDecrease = { if (restTime > 5) restTime -= 5 }
+            onDecrease = { if (restTime > 4) restTime -= 5 }
         )
 
         Spacer(modifier = Modifier.height(32.dp))
