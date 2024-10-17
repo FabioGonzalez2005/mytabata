@@ -42,6 +42,21 @@ fun MainMenu(modifier: Modifier = Modifier) {
     var exerciseTime by remember { mutableStateOf(30) }
     var restTime by remember { mutableStateOf(15) }
 
+    Spacer(modifier = Modifier.height(16.dp))
+
+    TimeSelector(
+        label = "Tiempo de ejercicio (segundos)",
+        value = exerciseTime,
+        onIncrease = { exerciseTime += 5 },
+        onDecrease = { if (exerciseTime > 5) exerciseTime -= 5 }
+    )
+
+    Spacer(modifier = Modifier.height(32.dp))
+
+    Button(onClick = { }) {
+        Text("Iniciar Tabata")
+    }
+}
 
 
 @Preview(showBackground = true)
