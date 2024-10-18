@@ -40,6 +40,8 @@ fun MainMenu(modifier: Modifier = Modifier) {
     var isCounting by remember { mutableStateOf(false) }
     var counter by remember { mutableStateOf<CounterDown?>(null) }
     var isResting by remember { mutableStateOf(false) }
+    var isGetReady by remember { mutableStateOf(true) }
+    val getReadyTime: Long = 10
 
     if (mostrarPantalla) {
         Column(
@@ -80,13 +82,13 @@ fun MainMenu(modifier: Modifier = Modifier) {
             Button(
                 onClick = {
                     mostrarPantalla = false
-                    tiempoRestante = exerciseTime.toLong()
-                    counter = CounterDown(exerciseTime) { remainingTime ->
+                    isGetReady = true
+                    tiempoRestante = getReadyTime
+                    counter = CounterDown(getReadyTime.toInt()) { remainingTime ->
                         tiempoRestante = remainingTime
                     }
                     counter?.start()
                     isCounting = true
-                    isResting = false
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
             ) {
@@ -96,6 +98,55 @@ fun MainMenu(modifier: Modifier = Modifier) {
                     fontSize = 24.sp,
                     textAlign = TextAlign.Center
                 )
+            }
+        }
+    } else if (isGetReady) {
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(0.dp)
+                .background(Color(0xFFFFA726)),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "Sets: $sets",
+                fontSize = 30.sp,
+                color = Color.Black
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                text = "${tiempoRestante}",
+                fontSize = 80.sp,
+                color = Color.Black
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                text = "GET READY",
+                fontSize = 50.sp,
+                color = Color.White,
+                textAlign = TextAlign.Center
+            )
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            LaunchedEffect(tiempoRestante) {
+                if (tiempoRestante <= 0) {
+                    isCounting = false
+                    counter?.cancel()
+                    isGetReady = false
+                    tiempoRestante = exerciseTime.toLong()
+                    counter = CounterDown(exerciseTime) { remainingTime ->
+                        tiempoRestante = remainingTime
+                    }
+                    counter?.start()
+                    isCounting = true
+                    isResting = false
+                }
             }
         }
     } else if (!isResting) {
