@@ -34,54 +34,72 @@ fun MainMenu(modifier: Modifier = Modifier) {
     var sets by remember { mutableStateOf(3) }
     var exerciseTime by remember { mutableStateOf(30) }
     var restTime by remember { mutableStateOf(15) }
+    var mostrarPantalla by remember { mutableStateOf(true) }
 
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        TimeSelector(
-            label = "Sets",
-            value = sets,
-            onIncrease = { sets++ },
-            onDecrease = { if (sets > 1) sets-- }
-        )
+    if (mostrarPantalla) {
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            TimeSelector(
+                label = "Sets",
+                value = sets,
+                onIncrease = { sets++ },
+                onDecrease = { if (sets > 1) sets-- }
+            )
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-        TimeSelector(
-            label = "Tiempo de ejercicio (segundos)",
-            value = exerciseTime,
-            onIncrease = { exerciseTime += 5 },
-            onDecrease = { if (exerciseTime > 5) exerciseTime -= 5 }
-        )
+            TimeSelector(
+                label = "Tiempo de ejercicio (segundos)",
+                value = exerciseTime,
+                onIncrease = { exerciseTime += 5 },
+                onDecrease = { if (exerciseTime > 5) exerciseTime -= 5 }
+            )
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-        TimeSelector(
-            label = "Tiempo de descanso (segundos)",
-            value = restTime,
-            onIncrease = { restTime += 5 },
-            onDecrease = { if (restTime > 4) restTime -= 5 }
-        )
+            TimeSelector(
+                label = "Tiempo de descanso (segundos)",
+                value = restTime,
+                onIncrease = { restTime += 5 },
+                onDecrease = { if (restTime > 4) restTime -= 5 }
+            )
 
-        Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(32.dp))
 
-        Button(
-            onClick = { },
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
+            Button(
+                onClick = { mostrarPantalla = false },
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
+            ) {
+                Text(
+                    text = "Iniciar tabata",
+                    color = Color.White,
+                    fontSize = 24.sp,
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+    } else {
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Iniciar tabata",
-                color = Color.White,
-                fontSize = 24.sp,
-                textAlign = TextAlign.Center
+                text = "Sets: $sets",
+                fontSize = 30.sp,
+                color = Color.Black
             )
         }
     }
 }
+
 
 @Composable
 fun TimeSelector(
