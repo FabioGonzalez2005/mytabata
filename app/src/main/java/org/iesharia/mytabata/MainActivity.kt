@@ -225,13 +225,61 @@ fun MainMenu(modifier: Modifier = Modifier) {
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            if (tiempoRestante <= 0) {
-                isResting = false
-                tiempoRestante = exerciseTime.toLong()
-                counter = CounterDown(exerciseTime) { remainingTime ->
-                    tiempoRestante = remainingTime
+            Row {
+                Button(
+                    onClick = {
+                        if (isCounting) {
+                            counter?.cancel()
+                            isCounting = false
+                        } else {
+                            counter?.start()
+                            isCounting = true
+                        }
+                    },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Text(
+                        text = if (isCounting) "Pausar" else "Reanudar",
+                        color = Color.White,
+                        fontSize = 24.sp,
+                        textAlign = TextAlign.Center
+                    )
                 }
-                counter?.start()
+
+                Spacer(modifier = Modifier.width(16.dp))
+
+                Button(
+                    onClick = {
+                        counter?.cancel()
+                        tiempoRestante = restTime.toLong()
+                        counter = CounterDown(restTime) { remainingTime ->
+                            tiempoRestante = remainingTime
+                        }
+                        counter?.start()
+                        isCounting = true
+                    },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Text(
+                        text = "Reiniciar",
+                        color = Color.White,
+                        fontSize = 24.sp,
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
+
+            LaunchedEffect(tiempoRestante) {
+                if (tiempoRestante <= 0) {
+                    isResting = false
+                    tiempoRestante = exerciseTime.toLong()
+                    counter = CounterDown(exerciseTime) { remainingTime ->
+                        tiempoRestante = remainingTime
+                    }
+                    counter?.start()
+                }
             }
         }
     }
