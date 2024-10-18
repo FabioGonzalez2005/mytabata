@@ -116,8 +116,8 @@ fun MainMenu(modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Contador: ${tiempoRestante} segundos",
-                fontSize = 30.sp,
+                text = "${tiempoRestante}",
+                fontSize = 80.sp,
                 color = Color.Black
             )
 
@@ -214,8 +214,8 @@ fun MainMenu(modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Contador: ${tiempoRestante} segundos",
-                fontSize = 30.sp,
+                text = "${tiempoRestante}",
+                fontSize = 80.sp,
                 color = Color.Black
             )
 
