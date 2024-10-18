@@ -97,6 +97,8 @@ fun MainMenu(modifier: Modifier = Modifier) {
                 color = Color.Black
             )
 
+            Spacer(modifier = Modifier.height(16.dp))
+
             Text(
                 text = "Contador: $exerciseTime segundos",
                 fontSize = 30.sp,
