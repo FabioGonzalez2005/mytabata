@@ -45,7 +45,7 @@ fun MainMenu(modifier: Modifier = Modifier) {
         Column(
             modifier = modifier
                 .fillMaxSize()
-                .padding(16.dp)
+                .padding(0.dp)
                 .background(Color.White),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -102,7 +102,7 @@ fun MainMenu(modifier: Modifier = Modifier) {
         Column(
             modifier = modifier
                 .fillMaxSize()
-                .padding(16.dp)
+                .padding(0.dp)
                 .background(Color(0xFF00E676)),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -182,6 +182,7 @@ fun MainMenu(modifier: Modifier = Modifier) {
                 if (tiempoRestante <= 0) {
                     isCounting = false
                     counter?.cancel()
+                    sets--
                     isResting = true
                     tiempoRestante = restTime.toLong()
                     counter = CounterDown(restTime) { remainingTime ->
@@ -195,7 +196,7 @@ fun MainMenu(modifier: Modifier = Modifier) {
         Column(
             modifier = modifier
                 .fillMaxSize()
-                .padding(16.dp)
+                .padding(0.dp)
                 .background(Color(0xFF2196F3)),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -252,6 +253,7 @@ fun MainMenu(modifier: Modifier = Modifier) {
                 Button(
                     onClick = {
                         counter?.cancel()
+                        sets--
                         tiempoRestante = restTime.toLong()
                         counter = CounterDown(restTime) { remainingTime ->
                             tiempoRestante = remainingTime
@@ -275,6 +277,7 @@ fun MainMenu(modifier: Modifier = Modifier) {
                 if (tiempoRestante <= 0) {
                     isResting = false
                     tiempoRestante = exerciseTime.toLong()
+                    sets--;
                     counter = CounterDown(exerciseTime) { remainingTime ->
                         tiempoRestante = remainingTime
                     }
