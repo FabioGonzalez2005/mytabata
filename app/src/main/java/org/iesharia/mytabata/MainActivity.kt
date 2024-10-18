@@ -96,6 +96,12 @@ fun MainMenu(modifier: Modifier = Modifier) {
                 fontSize = 30.sp,
                 color = Color.Black
             )
+
+            Text(
+                text = "Contador: $exerciseTime segundos",
+                fontSize = 30.sp,
+                color = Color.Black
+            )
         }
     }
 }
