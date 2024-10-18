@@ -161,7 +161,7 @@ fun MainMenu(modifier: Modifier = Modifier) {
                             tiempoRestante = remainingTime
                         }
                         counter?.start()
-                        isCounting = true;
+                        isCounting = true
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
                     modifier = Modifier.weight(1f)
@@ -197,7 +197,7 @@ fun MainMenu(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "REST",
+                text = "Sets: $sets",
                 fontSize = 30.sp,
                 color = Color.Black
             )
@@ -208,6 +208,15 @@ fun MainMenu(modifier: Modifier = Modifier) {
                 text = "Contador: ${tiempoRestante} segundos",
                 fontSize = 30.sp,
                 color = Color.Black
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                text = "REST",
+                fontSize = 24.sp,
+                color = Color.Red,
+                textAlign = TextAlign.Center
             )
 
             Spacer(modifier = Modifier.height(32.dp))
