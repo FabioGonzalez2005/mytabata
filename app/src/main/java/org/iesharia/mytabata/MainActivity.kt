@@ -125,8 +125,8 @@ fun MainMenu(modifier: Modifier = Modifier) {
 
             Text(
                 text = "WORK",
-                fontSize = 24.sp,
-                color = Color.Red,
+                fontSize = 50.sp,
+                color = Color.White,
                 textAlign = TextAlign.Center
             )
 
@@ -223,8 +223,8 @@ fun MainMenu(modifier: Modifier = Modifier) {
 
             Text(
                 text = "REST",
-                fontSize = 24.sp,
-                color = Color.Red,
+                fontSize = 50.sp,
+                color = Color.White,
                 textAlign = TextAlign.Center
             )
 
