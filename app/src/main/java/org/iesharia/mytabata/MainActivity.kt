@@ -37,7 +37,7 @@ fun MainMenu(modifier: Modifier = Modifier) {
     var mostrarPantalla by remember { mutableStateOf(true) }
     var tiempoRestante by remember { mutableStateOf(exerciseTime.toLong()) }
     var isCounting by remember { mutableStateOf(false) }
-    var counter: CounterDown? = remember { null }
+    var counter by remember { mutableStateOf<CounterDown?>(null) }
 
     if (mostrarPantalla) {
         Column(
