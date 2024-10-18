@@ -183,12 +183,16 @@ fun MainMenu(modifier: Modifier = Modifier) {
                     isCounting = false
                     counter?.cancel()
                     sets--
-                    isResting = true
-                    tiempoRestante = restTime.toLong()
-                    counter = CounterDown(restTime) { remainingTime ->
-                        tiempoRestante = remainingTime
+                    if (sets > 0) {
+                        isResting = true
+                        tiempoRestante = restTime.toLong()
+                        counter = CounterDown(restTime) { remainingTime ->
+                            tiempoRestante = remainingTime
+                        }
+                        counter?.start()
+                    } else {
+                        mostrarPantalla = true
                     }
-                    counter?.start()
                 }
             }
         }
@@ -253,7 +257,6 @@ fun MainMenu(modifier: Modifier = Modifier) {
                 Button(
                     onClick = {
                         counter?.cancel()
-                        sets--
                         tiempoRestante = restTime.toLong()
                         counter = CounterDown(restTime) { remainingTime ->
                             tiempoRestante = remainingTime
@@ -277,7 +280,6 @@ fun MainMenu(modifier: Modifier = Modifier) {
                 if (tiempoRestante <= 0) {
                     isResting = false
                     tiempoRestante = exerciseTime.toLong()
-                    sets--;
                     counter = CounterDown(exerciseTime) { remainingTime ->
                         tiempoRestante = remainingTime
                     }
