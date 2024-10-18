@@ -105,6 +105,8 @@ fun MainMenu(modifier: Modifier = Modifier) {
                 color = Color.Black
             )
 
+            Spacer(modifier = Modifier.height(16.dp))
+
             Text(
                 text = "WORK",
                 fontSize = 24.sp,
