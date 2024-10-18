@@ -155,7 +155,11 @@ fun MainMenu(modifier: Modifier = Modifier) {
                     onClick = {
                         counter?.cancel()
                         tiempoRestante = exerciseTime.toLong()
-                        isCounting = false
+                        counter = CounterDown(exerciseTime) { remainingTime ->
+                            tiempoRestante = remainingTime
+                        }
+                        counter?.start()
+                        isCounting = true
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
                     modifier = Modifier.weight(1f)
