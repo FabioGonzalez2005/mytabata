@@ -127,24 +127,46 @@ fun MainMenu(modifier: Modifier = Modifier) {
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            Button(
-                onClick = {
-                    if (isCounting) {
+            Row {
+                Button(
+                    onClick = {
+                        if (isCounting) {
+                            counter?.cancel()
+                            isCounting = false
+                        } else {
+                            counter?.start()
+                            isCounting = true
+                        }
+                    },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Text(
+                        text = if (isCounting) "Pausar" else "Reanudar",
+                        color = Color.White,
+                        fontSize = 24.sp,
+                        textAlign = TextAlign.Center
+                    )
+                }
+
+                Spacer(modifier = Modifier.width(16.dp))
+
+                Button(
+                    onClick = {
                         counter?.cancel()
+                        tiempoRestante = exerciseTime.toLong()
                         isCounting = false
-                    } else {
-                        counter?.start()
-                        isCounting = true
-                    }
-                },
-                colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
-            ) {
-                Text(
-                    text = if (isCounting) "Pausar" else "Reanudar",
-                    color = Color.White,
-                    fontSize = 24.sp,
-                    textAlign = TextAlign.Center
-                )
+                    },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Text(
+                        text = "Reiniciar",
+                        color = Color.White,
+                        fontSize = 24.sp,
+                        textAlign = TextAlign.Center
+                    )
+                }
             }
         }
     }
