@@ -38,6 +38,7 @@ fun MainMenu(modifier: Modifier = Modifier) {
     var tiempoRestante by remember { mutableStateOf(exerciseTime.toLong()) }
     var isCounting by remember { mutableStateOf(false) }
     var counter by remember { mutableStateOf<CounterDown?>(null) }
+    var isResting by remember { mutableStateOf(false) }
 
     if (mostrarPantalla) {
         Column(
@@ -83,6 +84,7 @@ fun MainMenu(modifier: Modifier = Modifier) {
                     }
                     counter?.start()
                     isCounting = true
+                    isResting = false
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
             ) {
@@ -94,7 +96,7 @@ fun MainMenu(modifier: Modifier = Modifier) {
                 )
             }
         }
-    } else {
+    } else if (!isResting) {
         Column(
             modifier = modifier
                 .fillMaxSize()
@@ -159,7 +161,7 @@ fun MainMenu(modifier: Modifier = Modifier) {
                             tiempoRestante = remainingTime
                         }
                         counter?.start()
-                        isCounting = true
+                        isCounting = true;
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
                     modifier = Modifier.weight(1f)
@@ -171,6 +173,52 @@ fun MainMenu(modifier: Modifier = Modifier) {
                         textAlign = TextAlign.Center
                     )
                 }
+            }
+
+            LaunchedEffect(tiempoRestante) {
+                if (tiempoRestante <= 0) {
+                    isCounting = false
+                    counter?.cancel()
+                    isResting = true
+                    tiempoRestante = restTime.toLong()
+                    counter = CounterDown(restTime) { remainingTime ->
+                        tiempoRestante = remainingTime
+                    }
+                    counter?.start()
+                }
+            }
+        }
+    } else {
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "REST",
+                fontSize = 30.sp,
+                color = Color.Black
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                text = "Contador: ${tiempoRestante} segundos",
+                fontSize = 30.sp,
+                color = Color.Black
+            )
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            if (tiempoRestante <= 0) {
+                isResting = false
+                tiempoRestante = exerciseTime.toLong()
+                counter = CounterDown(exerciseTime) { remainingTime ->
+                    tiempoRestante = remainingTime
+                }
+                counter?.start()
             }
         }
     }
