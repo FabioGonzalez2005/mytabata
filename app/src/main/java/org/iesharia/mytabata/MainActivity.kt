@@ -36,6 +36,8 @@ fun MainMenu(modifier: Modifier = Modifier) {
     var restTime by remember { mutableStateOf(15) }
     var mostrarPantalla by remember { mutableStateOf(true) }
     var tiempoRestante by remember { mutableStateOf(exerciseTime.toLong()) }
+    var isCounting by remember { mutableStateOf(false) }
+    var counter: CounterDown? = remember { null }
 
     if (mostrarPantalla) {
         Column(
@@ -75,6 +77,12 @@ fun MainMenu(modifier: Modifier = Modifier) {
             Button(
                 onClick = {
                     mostrarPantalla = false
+                    tiempoRestante = exerciseTime.toLong()
+                    counter = CounterDown(exerciseTime) { remainingTime ->
+                        tiempoRestante = remainingTime
+                    }
+                    counter?.start()
+                    isCounting = true
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
             ) {
@@ -102,21 +110,11 @@ fun MainMenu(modifier: Modifier = Modifier) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            var isCounting by remember { mutableStateOf(false) }
-
-            if (isCounting) {
-                Text(
-                    text = "Contador: ${tiempoRestante} segundos",
-                    fontSize = 30.sp,
-                    color = Color.Black
-                )
-            } else {
-                Text(
-                    text = "Contador: $exerciseTime segundos",
-                    fontSize = 30.sp,
-                    color = Color.Black
-                )
-            }
+            Text(
+                text = "Contador: ${tiempoRestante} segundos",
+                fontSize = 30.sp,
+                color = Color.Black
+            )
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -131,16 +129,18 @@ fun MainMenu(modifier: Modifier = Modifier) {
 
             Button(
                 onClick = {
-                    isCounting = true
-                    val counter = CounterDown(exerciseTime) { remainingTime ->
-                        tiempoRestante = remainingTime
+                    if (isCounting) {
+                        counter?.cancel()
+                        isCounting = false
+                    } else {
+                        counter?.start()
+                        isCounting = true
                     }
-                    counter.start()
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
             ) {
                 Text(
-                    text = "Iniciar contador",
+                    text = if (isCounting) "Pausar" else "Reanudar",
                     color = Color.White,
                     fontSize = 24.sp,
                     textAlign = TextAlign.Center
@@ -149,7 +149,6 @@ fun MainMenu(modifier: Modifier = Modifier) {
         }
     }
 }
-
 
 @Composable
 fun TimeSelector(
