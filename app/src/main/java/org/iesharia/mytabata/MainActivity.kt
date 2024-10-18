@@ -104,6 +104,13 @@ fun MainMenu(modifier: Modifier = Modifier) {
                 fontSize = 30.sp,
                 color = Color.Black
             )
+
+            Text(
+                text = "WORK",
+                fontSize = 24.sp,
+                color = Color.Red,
+                textAlign = TextAlign.Center
+            )
         }
     }
 }
