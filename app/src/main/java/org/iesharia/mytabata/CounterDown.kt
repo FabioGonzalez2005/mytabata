@@ -24,16 +24,6 @@ class CounterDown(var segundos: Int, var loquehacealhacertick: (Long) -> Unit) {
         }
     }
 
-    fun toggle() {
-        Log.i("dam2", "toggle: $counterState")
-        if (this.counterState) {
-            this.cancel()
-        } else {
-            Log.i("dam2", "toggle: start")
-            this.start()
-        }
-    }
-
     fun start() {
         counterState = true
         crearCounter(tiempoRestante)
